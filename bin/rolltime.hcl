@@ -1,5 +1,6 @@
 backend "file" {
  path = "~/data"
+ disable_mlock = 0
 }
 
 listener "tcp" {
