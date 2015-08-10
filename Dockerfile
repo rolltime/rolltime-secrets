@@ -14,9 +14,11 @@ RUN  wget http://dl.bintray.com/mitchellh/vault/vault_0.2.0_linux_amd64.zip \
   && mv vault /usr/local/bin/ \
   && rm -f vault_0.2.0_linux_amd64.zip
 
-RUN export VAULT_ADDR=http://127.0.0.1:8200
+RUN export VAULT_ADDR=http://127.0.0.1:8200 \
+  && wget https://raw.githubusercontent.com/rolltime/rolltime-secrets/master/bin/configure.sh \
+  && https://raw.githubusercontent.com/rolltime/rolltime-secrets/master/bin/rolltime.hcl
 
 EXPOSE 8200
 
 ENTRYPOINT [ "vault" ]
-CMD [ "server", "-dev" ]
+CMD [ "server", "-config=rolltime.hcl" ]
